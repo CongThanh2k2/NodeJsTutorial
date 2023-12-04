@@ -22,6 +22,55 @@ const userServer = {
         } catch (error) {
             console.log(error)
         }
+    }, 
+
+    create: async(req, res)=>{
+        try {
+            const {username, password} = req.body
+            const sql = 'INSERT INTO `accounts`.`users` ( `username`, `password`) VALUES ( ?, ?);'
+            const [rows,fields] = await connection.query(sql,[username, password])
+            res.json({
+                data : rows
+            })
+        } catch (error) {
+            console.log(error)
+            res.json({
+                status: "error"
+            })
+        }
+    },
+
+    update: async(req,res)=>{
+        try {
+            const {username, password} = req.body
+            const {id} = req.params
+            const sql = 'UPDATE `accounts`.`users` SET `username` = ?, `password` = ? WHERE (`id` = ?);'
+            const [rows,fields] = await connection.query(sql,[username, password,id])
+            res.json({
+                data : rows
+            })
+        } catch (error) {
+            console.log(error)
+            res.json({
+                status: "error"
+            })
+        }
+    },
+
+    delete: async(req,res)=>{
+        try {
+            const {id} = req.params
+            const sql = 'DELETE FROM `accounts`.`users` WHERE (`id` = ?);'
+            const [rows,fields] = await connection.query(sql,id)
+            res.json({
+                data : rows
+            })
+        } catch (error) {
+            console.log(error)
+            res.json({
+                status: "error"
+            })
+        }
     }
 }
 
