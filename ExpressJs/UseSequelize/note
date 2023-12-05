@@ -1,0 +1,14 @@
+// cai
+//     npm i sequelize-cli
+//     npm i sequelize
+//     npm i nodemon
+//     npm i dotenv
+//     npm i express
+
+// tao file .sequelizerc de cau hinh
+//cau hinh 3 folder dung: npx sequelize-cli init
+
+//tao model
+//npx sequelize-cli model:generate --name accounts --attributes id:bigint,username:string,password:string
+
+
