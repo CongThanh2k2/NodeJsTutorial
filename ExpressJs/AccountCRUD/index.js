@@ -12,6 +12,7 @@ app.use('/api/user/',userRounter)
 
 const PORT = process.env.PORT
 
+
 app.listen(PORT, ()=>{
     console.log('Server running.....')
 })
