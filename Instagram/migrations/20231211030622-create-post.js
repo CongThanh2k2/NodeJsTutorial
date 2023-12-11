@@ -31,10 +31,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       reaction_count: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       comment_count: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       commenting: {
         type: Sequelize.BOOLEAN

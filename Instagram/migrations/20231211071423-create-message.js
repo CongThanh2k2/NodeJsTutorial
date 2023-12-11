@@ -2,31 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      created_user_id: {
+      from_user_id: {
         type: Sequelize.STRING
       },
-      post_id: {
+      to_user_id: {
         type: Sequelize.STRING
       },
-      created_time: {
-        type: Sequelize.DATE
+      group_id: {
+        type: Sequelize.STRING
       },
-      reaction_count: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      message_text: {
+        type: Sequelize.STRING
       },
-      reply_comment_count: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      comment: {
+      sent_time: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -42,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable('messages');
   }
 };

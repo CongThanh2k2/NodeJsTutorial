@@ -2,31 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('post_media', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      created_user_id: {
-        type: Sequelize.STRING
-      },
       post_id: {
         type: Sequelize.STRING
       },
-      created_time: {
-        type: Sequelize.DATE
+      index_post_media: {
+        type: Sequelize.INTEGER
       },
-      reaction_count: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      reply_comment_count: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      comment: {
+      media_path: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -42,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable('post_media');
   }
 };

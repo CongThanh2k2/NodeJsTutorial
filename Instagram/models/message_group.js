@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
+  class message_group extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,16 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Comment.init({
-    created_user_id: DataTypes.STRING,
-    post_id: DataTypes.STRING,
-    created_time: DataTypes.DATE,
-    reaction_count: DataTypes.INTEGER,
-    reply_comment_count: DataTypes.INTEGER,
-    comment: DataTypes.STRING
+  message_group.init({
+    user_id_created: DataTypes.STRING,
+    group_name: DataTypes.STRING,
+    image: DataTypes.STRING,
+    request_to_join: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'Comment',
+    modelName: 'message_group',
   });
-  return Comment;
+  return message_group;
 };
