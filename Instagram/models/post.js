@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     created_user_id: DataTypes.STRING,
     post_type: DataTypes.STRING,
     created_time: DataTypes.DATE,
-    caption: DataTypes.STRING
+    caption: DataTypes.STRING,
+    x_location: DataTypes.STRING,
+    y_location: DataTypes.STRING,
+    name_location: DataTypes.STRING,
+    reaction_count: DataTypes.INTERGER,
+    comment_count: DataTypes.INTERGER,
+    commenting: DataTypes.BOOLEAN,
+    hide_like_and_view_counts: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Post',

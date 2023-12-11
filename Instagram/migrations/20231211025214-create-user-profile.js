@@ -2,11 +2,29 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Taggeds', {
+    await queryInterface.createTable('User_profiles', {
       user_id: {
         type: Sequelize.STRING
       },
-      post_media_id: {
+      fullname: {
+        type: Sequelize.STRING
+      },
+      birthday: {
+        type: Sequelize.DATE
+      },
+      avatar: {
+        type: Sequelize.STRING
+      },
+      bio: {
+        type: Sequelize.STRING
+      },
+      gender: {
+        type: Sequelize.INTEGER
+      },
+      active: {
+        type: Sequelize.BOOLEAN
+      },
+      active_time: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -22,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Taggeds');
+    await queryInterface.dropTable('User_profiles');
   }
 };
