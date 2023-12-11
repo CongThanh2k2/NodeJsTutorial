@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     x_location: DataTypes.STRING,
     y_location: DataTypes.STRING,
     name_location: DataTypes.STRING,
-    reaction_count: DataTypes.INTERGER,
-    comment_count: DataTypes.INTERGER,
+    reaction_count: DataTypes.BIGINT,
+    comment_count: DataTypes.BIGINT,
     commenting: DataTypes.BOOLEAN,
     hide_like_and_view_counts: DataTypes.BOOLEAN
   }, {
