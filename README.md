@@ -14,6 +14,7 @@ Migrations
         npx sequelize-cli db:migrate:undo
     Roolback all:
         npx sequelize-cli db:migrate:undo:all
+    create
 
 API
 

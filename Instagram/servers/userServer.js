@@ -19,7 +19,19 @@ const userServer={
                 email:email,
                 username:username
             })
-            res.json('create successful')
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    findUserByUsername: async(req,res)=>{
+        try {
+            const{username,password}=req.body
+            await db.User.findAll({
+                where:{
+                    username:username,
+                    password: password
+                }
+            })
         } catch (error) {
             console.log(error)
         }
