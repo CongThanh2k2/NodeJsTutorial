@@ -10,9 +10,8 @@ const userServer={
             console.log(error)
         }
     },
-    createUser: async(req,res)=>{
+    createUser: async(mobile_number, password, email, username)=>{
         try {
-            const {mobile_number, password, email, username}= req.body
             await db.User.create({
                 mobile_number: mobile_number,
                 password:password,
@@ -23,15 +22,26 @@ const userServer={
             console.log(error)
         }
     },
-    findUserByUsername: async(req,res)=>{
+    findUserByUsername: async(username)=>{
         try {
-            const{username,password}=req.body
-            await db.User.findAll({
+            const user = await db.User.findOne({
                 where:{
-                    username:username,
-                    password: password
+                    username:username
                 }
             })
+            return user
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    findUserByEmail: async(email)=>{
+        try {
+            const user = await db.User.findOne({
+                where:{
+                    email:email
+                }
+            })
+            return user
         } catch (error) {
             console.log(error)
         }

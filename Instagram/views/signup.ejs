@@ -3,75 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <title>Instagram</title>
     <link rel="shortcut icon" type="image/x-icon"
         href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" />
-    <!-- Latest compiled and minified CSS
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Latest compiled JavaScript -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>  -->
-
-    <!-- <link href="../public/css/output.css" rel="stylesheet"> -->
 
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body>
-    <div class="grid grid-cols-2 gap-x-6 max-w-7xl mx-auto mt-7 max-h-screen">
 
-        <div class="">
-            <img src="https://static.cdninstagram.com/images/instagram/xig/homepage/phones/home-phones.png?__makehaste_cache_breaker=HOgRclNOosk"
-                alt="" class="w-full mt-16" />
-            <!-- <img src="https://www.instagram.com/images/instagram/xig/homepage/screenshots/screenshot2.png?__d=www"
-                alt="" class="w-full mt-16" /> -->
-
-        </div>
+    <div class="max-w-xl mx-auto mt-4">
         <div>
-            <div class="w-5/6 h-2/3 mt-5 mx-auto border">
+            <div class="w-5/6 h-5/6 mt-5 mx-auto border">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png"
                     alt="" class="mx-auto w-60 mt-14" />
-                <form action="/api/instagram/user/login" method="post">
-                    <input type="text" name="username" id="username"
-                        class="block mx-auto w-10/12 mt-14 rounded border-0 py-3.5 pl-5 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none  sm:text-lg sm:leading-6"
-                        placeholder="Phone number, username, or email">
-                    <input type="password" name="password" id="password"
-                        class="block mx-auto w-10/12 mt-3 rounded border-0 py-3.5 pl-5 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-lg sm:leading-6"
-                        placeholder="Password">
-
-                    <button
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-medium sm:text-xl block mx-auto w-10/12 mt-5 py-2 rounded-xl">
-                        Log in
-                    </button>
-                </form>
-                <div class="inline-flex items-center justify-center w-full mt-5">
-                    <hr class="w-10/12 h-px my-8 bg-gray-200 border-0">
-                    <span class="absolute px-3 font-semibold -translate-x-2 bg-white text-gray-600">OR</span>
-                </div>
-
-                <button type="button" class="inline-flex justify-center w-full mt-5">
+                <span class="flex justify-center  w-4/6 font-medium text-xl text-center mx-20" style="color: #737373;">
+                    Sign up to see photos and videos from your friends.
+                </span>
+                <button
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-medium sm:text-xl block mx-auto w-10/12 mt-5 py-2 rounded-xl">
                     <span data-te-ripple-init data-te-ripple-color="light"
-                        class="inline-block  p-1 mt-1 text-xs font-medium uppercase leading-normal text-white "
-                        style="background-color: #385185">
+                        class="inline-block  p-1 mt-1 text-xl font-medium uppercase leading-normal text-blue-500 bg-white rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                         </svg>
                     </span>
-                    <span class="mx-4 font-medium text-xl" style="color: #385185;">Log in with Facebook</span>
+                    <span class="mx-1 font-medium text-xl" style="color: #f9fafc;">Log in with Facebook</span>
                 </button>
-                <a href="#" class="inline-flex justify-center w-full mt-6 text-lg" style="color:#00379B ;">
-                    Forgot password?
-                </a>
+                <div class="inline-flex items-center justify-center w-full mt-1">
+                    <hr class="w-10/12 h-px my-8 bg-gray-200 border-0">
+                    <span class="absolute px-3 font-semibold -translate-x-2 bg-white text-gray-600">OR</span>
+                </div>
+                <form method="post" action="/api/instagram/user/signup/create">
+                    <input type="text" name="email" id="email"
+                        class="block mx-auto w-10/12 mt-1 rounded border-0 py-3.5 pl-3 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none  sm:text-lg sm:leading-6"
+                        placeholder="Mobile Number or Email">
+                    <input type="text" name="fullname" id="fullname"
+                        class="block mx-auto w-10/12 mt-3 rounded border-0 py-3.5 pl-3 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none  sm:text-lg sm:leading-6"
+                        placeholder="Full name">
+                    <input type="text" name="username" id="username"
+                        class="block mx-auto w-10/12 mt-3 rounded border-0 py-3.5 pl-3 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none  sm:text-lg sm:leading-6"
+                        placeholder="Username">
+                    <input type="password" name="password" id="password"
+                        class="block mx-auto w-10/12 mt-3 rounded border-0 py-3.5 pl-3 ring-1  ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-lg sm:leading-6"
+                        placeholder="Password">
+
+                    <div class="mx-auto w-10/12 text-center mt-5 text-lg">
+                        <span>
+                            People who use our service may have uploaded your contact information to Instagram.
+                        </span>
+                        <a href="#" class="text-blue-900"> Learn More</a>
+                    </div>
+                    <div class="mx-auto w-10/12 text-center mt-5 text-lg">
+                        <span>
+                            By signing up, you agree to our
+                        </span>
+                        <a href="#" class="text-blue-900"> Terms</a>
+                        <span>, </span>
+                        <a href="#" class="text-blue-900">Privacy Policy</a>
+                        <span> and </span>
+                        <a href="#" class="text-blue-900">Cookies Policy.</a>
+                    </div>
+
+                    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                        class=" bg-blue-500 hover:bg-blue-600 text-white font-medium sm:text-xl block mx-auto w-10/12 mt-5 py-2 rounded-xl">
+                        Sign up
+                    </button>
+
+                </form>
+
+
+
+
             </div>
-            <form class="w-5/6 h-24 mt-5 mx-auto border" action="/api/instagram/user/signup" method="Get">
+            <form class="w-5/6 h-24 mt-5 mx-auto border" action="/api/instagram/user" method="Get">
                 <div class="inline-flex justify-center w-full mt-8 text-xl">
                     <span>
-                        Don't have an account?
+                        Have an account?
                     </span>
-                    <button href="#" name="signup" type="submit" class="px-3 font-bold" style="color: #0095F6;">
-                        Sign up
+                    <button href="#" class="px-3 font-bold" style="color: #0095F6;">
+                        Log in
                     </button>
                 </div>
             </form>
@@ -89,6 +103,8 @@
             </div>
         </div>
     </div>
+
+    <!-- footer web -->
     <div class="max-w-7xl mx-auto" style="color: #737373;">
         <div class="inline-flex justify-center w-full">
             <a href="#" class="mx-3 hover:underline">Meta</a>
@@ -142,7 +158,7 @@
             </span>
         </div>
     </div>
-    <!-- <script src="/tw-elements/dist/js/tw-elements.umd.min.js" type="text/javascript"></script> -->
+
 </body>
 
 </html>

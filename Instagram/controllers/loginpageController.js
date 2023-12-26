@@ -5,18 +5,19 @@ const loginPageController = {
         return res.render("login.ejs")
     },
     login: async(req, res) => {
-        // if (!req.body.username || !req.body.password) {
-        //     res.status("400")
-        //     res.send('Invalid details!')
-        // } else {
-        //     userServer.getAllUser
-        //     return res.render("home.ejs")
-        // }
-        let user=userServer.getAllUser
-        console.log('check: ',user)
-        return res.render("home.ejs",{user})
+        const {username, password} = req.body
+
+        const user = await userServer.findUserByUsername(username)
+        if (user) {
+            if(user.password==password){
+                return res.render("home.ejs")
+            }else{
+                return res.json({error: "password"})
+            }
+        } else {
+            return res.json({error: "username"})
+        }
     }
 
 }
-
 module.exports = loginPageController
