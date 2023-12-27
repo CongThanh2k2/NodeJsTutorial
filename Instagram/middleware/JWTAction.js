@@ -2,8 +2,7 @@ const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
 const JWTaction = {
-    createJWT: ()=>{
-        let payLoad = {name: 'Thanh', address:'ha nnoi' }
+    createJWT: (payLoad)=>{
         let key = process.env.JWT_SECRET
         let token = null
         try {

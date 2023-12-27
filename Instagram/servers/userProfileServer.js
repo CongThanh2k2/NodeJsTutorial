@@ -16,6 +16,19 @@ const userProfileServer={
         } catch (error) {
             console.log(error)
         }
+    },
+    findUserProfileByUserID: async(userID)=>{
+        try {
+            const userProfile = await db.User_profile.findOne({
+                where:{
+                    user_id:userID
+                }
+            }) 
+            return userProfile
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 }
 
