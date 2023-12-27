@@ -16,7 +16,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       created_time: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       caption: {
         type: Sequelize.STRING
@@ -31,18 +33,24 @@ module.exports = {
         type: Sequelize.STRING
       },
       reaction_count: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
       comment_count: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
       commenting: {
-        type: Sequelize.BOOLEAN
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       hide_like_and_view_counts: {
-        type: Sequelize.BOOLEAN
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,
