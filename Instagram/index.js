@@ -8,6 +8,7 @@ const postTypeRounter = require('./routers/postTypeRouter.js')
 const bodyParser = require('body-parser')
 const jwt = require('./middleware/JWTAction.js')
 const path = require('path')
+var cookieParser = require('cookie-parser')
 
 
 require('dotenv').config()
@@ -17,13 +18,14 @@ viewEngine(app)
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 app.use('/api/instagram/post/',postRounter)
 app.use('/api/instagram/user/',userRounter)
 app.use('/api/instagram/post_type/',postTypeRounter)
 app.use(express.static("public"))
 app.use(express.static("node_modules"));
-app.use(express.static(__dirname+'images'))
+app.use('/api/instagram/images/',express.static('images'))
 
 connection()
 

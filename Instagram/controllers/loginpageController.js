@@ -1,6 +1,7 @@
 const userServer = require('../servers/userServer.js')
 const userProfileServer = require('../servers/userProfileServer.js')
 const jwt = require('../middleware/JWTAction.js')
+const postServer = require('../servers/postServer.js')
 require('dotenv').config()
 
 const loginPageController = {
@@ -20,7 +21,12 @@ const loginPageController = {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 }
                 let token = jwt.createJWT(payLoad)
-                return res.render("home.ejs",{user,userProfile})
+                res.cookie("token",token,{
+                    httpOnly:true
+                })
+                let postList = await postServer.getAllPostByUserId(user.id)
+
+                return res.render("home.ejs",{user,userProfile,postList})
                 // return token
             }else{
                 return res.json({error: "password"})
