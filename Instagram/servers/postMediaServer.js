@@ -11,6 +11,18 @@ const postMediaServer={
         } catch (error) {
             console.log(error)
         }
+    }, 
+    getPostMedia : async (post_id)=>{
+        try {
+            const postMedia =await db.post_media.findOne({
+                where: {
+                    post_id : post_id
+                }
+            })
+            return postMedia
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 module.exports = postMediaServer

@@ -45,6 +45,18 @@ const userServer={
         } catch (error) {
             console.log(error)
         }
+    },
+    findUserByID: async(id)=>{
+        try {
+            const user = await db.User.findOne({
+                where:{
+                    id:id
+                }
+            })
+            return user
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

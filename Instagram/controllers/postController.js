@@ -27,14 +27,30 @@ const postController = {
             const user =await userServer.findUserByUsername(dataUsername)
             const userProfile = await userProfileServer.findUserProfileByUserID(user.id)
             
-            const path = req.file.path
+            var filePath = req.file.path+''
+            
+            const path = filePath.substring(filePath.search("post"),filePath.length)
+
             const userid = user.id
             const newPost = await postServer.createPost(userid,null,null,null,null,null)
             const postID = newPost.id
             await postMediaServer.createPostMedia(postID,1,path)
 
-            let postList = await postServer.getAllPostByUserId(userid)
-            
+            let allPost = await postServer.getAllPost()
+
+            const postList = await Promise.all(allPost.map(async(post)=>{
+                let postHasPath ={}
+                postHasPath.id = post.id
+                let path = await postMediaServer.getPostMedia(post.id)
+                postHasPath.path = path.media_path
+                let userCreated = await userServer.findUserByID(post.created_user_id)
+                postHasPath.user_created = userCreated.username
+                postHasPath.caption = post.caption
+                postHasPath.reaction_count = post.reaction_count
+                postHasPath.comment_count = post.comment_count
+                return postHasPath
+            }))
+
 
             res.render("home.ejs",{user,userProfile,postList,path});
             

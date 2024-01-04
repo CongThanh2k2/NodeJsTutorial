@@ -27,6 +27,18 @@ const postServer={
         } catch (error) {
             console.log(error)
         }
+    }, 
+    getAllPost: async()=>{
+        try {
+            const listPostByUser = await db.Post.findAll({
+                order:[
+                    ['created_time', 'DESC']
+                ]
+            })
+            return listPostByUser
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 module.exports = postServer
