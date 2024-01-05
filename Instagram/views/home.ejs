@@ -10,11 +10,14 @@
         href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+    <!-- or -->
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+    <script src="../node_modules/infinite-scroll/dist/infinite-scroll.pkgd.min.js"></script>
 </head>
 
-<body>
-
-    <div class="h-max text-white">
+<body class="bg-black">
+    <div class="h-max text-white bg-black" >
         <nav class="bg-black fixed w-1/6  h-screen border-r border-gray-400 start-0">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
                 <div class="w-full pt-6 pb-4 px-6 mb-5 ">
@@ -169,7 +172,8 @@
 
             </div>
         </nav>
-        <div class="w-5/6 h-dvh absolute end-0  text-white">
+        <div class="w-5/6  absolute end-0  text-white" style="height: 100vh;">
+
             <div class="w-4/6 absolute start-0 bg-black  border-r border-gray-400 px-36">
                 <div class=" h-32 py-2 items-center w-full mt-10 inline-flex justify-start">
                     <div id="postMain" class="py-2 w-20 mr-2 h-full text-center">
@@ -209,9 +213,10 @@
                         <span class="text-base">Name 4</span>
                     </div>
                 </div>
-                <div>
+                <div class="container"
+                    data-infinite-scroll='{ "path": ".pagination__next", "append":".py-2", "history": false }'>
                     <% postList.forEach(function(item,index){ %>
-                        <div id="onePost" class="py-2 items-center w-full mt-5 inline-flex justify-center">
+                        <article id="onePost" class="py-2 items-center w-full mt-5 inline-flex justify-center">
                             <div class="w-4/5">
                                 <div class="w-full h-12 pb-3 pl-1 inline-flex  items-center">
                                     <div class="h-full w-5/6 inline-flex justify-start items-center">
@@ -342,13 +347,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                         <% }) %>
                 </div>
 
 
             </div>
-            <div class="w-2/6 h-dvh bg-black absolute end-0 pl-16 pr-40">
+
+            <div class="w-2/6 bg-black absolute end-0 pl-16 pr-40" style="height: 100vh;">
                 <div class="mt-10">
                     <div class="w-full h-16 inline-flex items-center">
                         <div class="h-full w-1/6">
@@ -495,20 +501,15 @@
                     <span class="text-3xl">Drag photos and videos here</span>
                 </div>
                 <div class="w-full flex items-center justify-center mt-10">
-                    <!-- <form action="/api/instagram/post/upload-post" method="post" enctype="multipart/form-data">
-                        <button for="dropzone-file" type="submit"
+                    <form id="MyGreatFileUploadForm" action="/api/instagram/post/upload-post" method="post"
+                        enctype="multipart/form-data">
+                        <input type="file" id="MyGreatFileUploadHidedButton" name="post"
+                            onChange="document.getElementById('MyGreatFileUploadForm').submit();"
+                            style="display:none;" />
+                        <button type="button" onclick="document.getElementById('MyGreatFileUploadHidedButton').click();"
                             class="bg-blue-500 hover:bg-blue-600 font-bold py-2 px-6 rounded-lg text-lg">
                             Select from computer
-                            <input name="post" id="dropzone-file" type="file" class="hidden" value="Upload" />
                         </button>
-                    </form> -->
-                    <form method="POST" action="/api/instagram/post/upload-post" enctype="multipart/form-data">
-                        <div>
-                            <input type="file" name="post" />
-                        </div>
-                        <div>
-                            <button type="submit" name="btn_upload_profile_pic">Upload</button>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -525,6 +526,14 @@
             create.classList.remove('flex');
             create.classList.add('hidden');
         }
+        // let elem = document.querySelector('.container');
+        // let infScroll = new InfiniteScroll(elem, {
+        //     // options
+        //     path: '.pagination__next',
+        //     append: document.getElementById("onePost"),
+        //     history: false,
+        // });
+
     </script>
 </body>
 
