@@ -35,8 +35,22 @@ const postController = {
             const newPost = await postServer.createPost(userid,null,null,null,null,null)
             const postID = newPost.id
             await postMediaServer.createPostMedia(postID,1,path)
+            const pageAsNumber = Number.parseInt(req.query.page)
+        
+        const sizeAsNumber = Number.parseInt(req.query.size)
+            let page = 0
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber
+        }
+        
+        let size = 5
+        if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && size < 5) {
+            size = sizeAsNumber
+        }
+            const posts = await postServer.getPagePost(page,size)
+            let allPost = posts.rows
 
-            let allPost = await postServer.getAllPost()
+            
 
             const postList = await Promise.all(allPost.map(async(post)=>{
                 let postHasPath ={}
@@ -52,8 +66,36 @@ const postController = {
             }))
 
 
+
             res.render("home.ejs",{user,userProfile,postList,path});
             
+    },
+    getAllPost: async(req, res)=>{
+        const pageAsNumber = Number.parseInt(req.query.page)
+        let page = 0
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber
+        }
+        
+        let size = 5
+        let posts = await postServer.getPagePost(page,size)
+        let allPost = posts.rows
+        const postList = await Promise.all(allPost.map(async(post)=>{
+            let postHasPath ={}
+            postHasPath.id = post.id
+            let path = await postMediaServer.getPostMedia(post.id)
+            postHasPath.path = path.media_path
+            let userCreated = await userServer.findUserByID(post.created_user_id)
+            postHasPath.user_created = userCreated.username
+            postHasPath.caption = post.caption
+            postHasPath.reaction_count = post.reaction_count
+            postHasPath.comment_count = post.comment_count
+            return postHasPath
+        }))
+        let data ={}
+        data.total=posts.count
+        data.data=postList
+        res.send(data)
     }
 }
 module.exports = postController

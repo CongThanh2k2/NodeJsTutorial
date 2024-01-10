@@ -8,6 +8,8 @@ const userServer  = require('../servers/userServer.js')
 
 router.get('/',loginPageController.getText)
 router.post('/login',loginPageController.login)
+router.get('/login',loginPageController.load)
+// router.get('/login?page=/:page',loginPageController.load)
 
 router.get('/all',userServer.getAllUser)
 router.post('/create',userServer.createUser)

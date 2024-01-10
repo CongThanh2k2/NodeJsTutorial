@@ -26,11 +26,23 @@ const loginPageController = {
                     httpOnly: true
                 })
 
-                const start = req.query.start;
-                const end = req.query.end;
+                const pageAsNumber = Number.parseInt(req.query.page)
+                console.log(req.query.page)
+                const sizeAsNumber = Number.parseInt(req.query.size)
+
+                let page = 0
+                if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+                    page = pageAsNumber
+                }
+                let size = 5
+                if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && size < 5) {
+                    size = sizeAsNumber
+                }
+
+                let posts = await postServer.getPagePost(page, size)
+                let allPost = posts.rows
 
 
-                let allPost = await postServer.getAllPost()
 
                 const postList = await Promise.all(allPost.map(async (post) => {
                     let postHasPath = {}
@@ -53,6 +65,46 @@ const loginPageController = {
         } else {
             return res.json({ error: "username" })
         }
+    },
+    load: async (req, res) => {
+        const data = jwt.verifyToken(req.cookies.token)
+        const dataUsername = data.username
+        const user = await userServer.findUserByUsername(dataUsername)
+        const userProfile = await userProfileServer.findUserProfileByUserID(user.id)
+        const pageAsNumber = Number.parseInt(req.query.page)
+        
+        const sizeAsNumber = Number.parseInt(req.query.size)
+
+        let page = 0
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber
+        }
+        
+        let size = 5
+        if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && size < 5) {
+            size = sizeAsNumber
+        }
+
+        let posts = await postServer.getPagePost(page, size)
+        let allPost = posts.rows
+
+        
+
+
+        const postList = await Promise.all(allPost.map(async (post) => {
+            let postHasPath = {}
+            postHasPath.id = post.id
+            let path = await postMediaServer.getPostMedia(post.id)
+            postHasPath.path = path.media_path
+            let userCreated = await userServer.findUserByID(post.created_user_id)
+            postHasPath.user_created = userCreated.username
+            postHasPath.caption = post.caption
+            postHasPath.reaction_count = post.reaction_count
+            postHasPath.comment_count = post.comment_count
+            return postHasPath
+        }))
+
+        return res.render("home.ejs",{ user , userProfile, postList })
     }
 
 }

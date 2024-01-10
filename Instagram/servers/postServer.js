@@ -28,14 +28,28 @@ const postServer={
             console.log(error)
         }
     }, 
+    getPagePost: async(page,size)=>{
+        try {
+            const listPostByUser = await db.Post.findAndCountAll({
+                order:[
+                    ['created_time', 'DESC']
+                ],
+                limit: size,
+                offset: page*size
+            })
+            return listPostByUser
+        } catch (error) {
+            console.log(error)
+        }
+    },
     getAllPost: async()=>{
         try {
-            const listPostByUser = await db.Post.findAll({
+            const listPost = await db.Post.findAndCountAll({
                 order:[
                     ['created_time', 'DESC']
                 ]
             })
-            return listPostByUser
+            return listPost
         } catch (error) {
             console.log(error)
         }
